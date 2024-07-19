@@ -3,7 +3,7 @@ from .models import *
 class ProductsListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ["name", "image", "price", "shop", "category", "slug"]
+        fields = ["name", "image", "price", "shop", "category", "slug", "description"]
 
 class CategoryListSerializer(serializers.ModelSerializer):
     class Meta:

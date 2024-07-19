@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'market',
     'mptt',
     'drf_spectacular',
-    'Users'
+    'Users',
+    'djoser',
 ]
 
 MIDDLEWARE = [

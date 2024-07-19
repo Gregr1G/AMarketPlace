@@ -2,6 +2,7 @@ from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 from Users.models import Shop
 from transliterate import translit
+from Base.servises import *
 
 class Category(MPTTModel):
     """Модель описания древовидных категорий"""
@@ -29,7 +30,7 @@ class Product(models.Model):
                                  verbose_name='Выберите категорию')
     name = models.CharField(max_length=200, db_index=True, verbose_name='Наменование')
     slug = models.SlugField(max_length=200, unique=True)
-    image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True, verbose_name='Фото')
+    image = models.ImageField(upload_to=get_upload_product_path, blank=True, verbose_name='Фото')
     description = models.TextField(blank=True, verbose_name='Описание')
     price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name='Цена')
     available = models.BooleanField(default=True, verbose_name='Наличие')
