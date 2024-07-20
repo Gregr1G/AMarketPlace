@@ -1,6 +1,7 @@
 from rest_framework import generics, viewsets
 from .serializers import *
 from .models import *
+from Base.permissions import UserShopExist
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
@@ -32,4 +33,13 @@ class PublicProductsListByShopApiView(generics.ListAPIView):
     def get_queryset(self):
         return Product.objects.filter(shop=get_object_or_404(Shop, name=self.kwargs["name"]))
 
+class UserProductViewSet(viewsets.ModelViewSet):
+    permission_classes = [UserShopExist]
+    serializer_class = ProductsListSerializer
+
+    def get_queryset(self):
+        return Product.objects.filter(shop=get_object_or_404(Shop, owner=self.request.user))
+
+    def perform_create(self, serializer):
+        return serializer.save(shop=get_object_or_404(Shop, owner=self.request.user))
 
