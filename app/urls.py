@@ -38,5 +38,6 @@ urlpatterns = [
     ),
     path('admin/', admin.site.urls),
     path('api/v1/', include("market.urls")),
-    path('api/', include("Users.urls")),
+    path('api/v1/', include("cart.urls")),
+    path('', include("Users.urls")),
 ]
